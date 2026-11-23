@@ -1,0 +1,1 @@
+# AWS provider and backend configuration are defined in backend.tf
