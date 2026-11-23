@@ -193,30 +193,30 @@ resource "aws_athena_named_query" "create_table" {
 
 locals {
   athena_queries = {
-    "01-top-rejected-sources" = <<-SQL
+    "01-top-rejected-sources"    = <<-SQL
       SELECT srcaddr, dstport, COUNT(*) AS rejects
       FROM vpc_flow_logs
       WHERE action = 'REJECT' AND "date" >= date_format(current_date - interval '1' day, '%Y/%m/%d')
       GROUP BY srcaddr, dstport ORDER BY rejects DESC LIMIT 20;
     SQL
-    "02-ssh-rdp-attempts" = <<-SQL
+    "02-ssh-rdp-attempts"        = <<-SQL
       SELECT srcaddr, dstaddr, dstport, action, COUNT(*) AS hits
       FROM vpc_flow_logs
       WHERE dstport IN (22, 3389)
       GROUP BY srcaddr, dstaddr, dstport, action ORDER BY hits DESC LIMIT 50;
     SQL
-    "03-port-scan-detection" = <<-SQL
+    "03-port-scan-detection"     = <<-SQL
       SELECT srcaddr, COUNT(DISTINCT dstport) AS distinct_ports, COUNT(*) AS flows
       FROM vpc_flow_logs
       GROUP BY srcaddr HAVING COUNT(DISTINCT dstport) > 15
       ORDER BY distinct_ports DESC;
     SQL
-    "04-top-talkers-bytes" = <<-SQL
+    "04-top-talkers-bytes"       = <<-SQL
       SELECT srcaddr, dstaddr, SUM(bytes) AS total_bytes
       FROM vpc_flow_logs
       GROUP BY srcaddr, dstaddr ORDER BY total_bytes DESC LIMIT 20;
     SQL
-    "05-possible-exfiltration" = <<-SQL
+    "05-possible-exfiltration"   = <<-SQL
       -- داتا خارجة بكميات كبيرة لعناوين برا الـ VPC (عدّل الـ CIDR)
       SELECT srcaddr, dstaddr, SUM(bytes) AS out_bytes
       FROM vpc_flow_logs
