@@ -1,0 +1,14 @@
+# Region: us-east-1 | VPC 10.0.0.0/16 (القيم دي هي الـ defaults أصلاً)
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24"]
+
+# اختياري: لو عندك SG الـ workload حطه (أحسن least privilege)
+# workload_sg_id = "sg-xxxxxxxx"
+alarm_email = "you@example.com"
+
+enable_privatelink_demo  = false
+# app_instance_id        = "i-xxxx"
+enable_traffic_mirroring = false
+# mirror_source_eni_id   = "eni-xxxx"
+# mirror_target_eni_id   = "eni-yyyy"
