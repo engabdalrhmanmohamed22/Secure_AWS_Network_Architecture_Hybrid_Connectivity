@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket       = "depi-team-1-tfstate"
-    key          = "person4/terraform.tfstate" # state مستقل عشان ما يتعارضش مع باقي الفريق
+    key          = "arwa/terraform.tfstate" # state مستقل عشان ما يتعارضش مع باقي الفريق
     region       = "us-east-1"
     profile      = "depi-team-1"
     encrypt      = true
