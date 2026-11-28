@@ -1,0 +1,6 @@
+.terraform/
+*.tfstate*
+terraform.tfvars
+*.csv
+plan-output.txt
+plan-output*
